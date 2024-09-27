@@ -20,12 +20,12 @@ const recursoRoutes = require('./routes/recurso');
 // Usar as rotas corretamente
 app.use('/usuario', usuarioRoutes);
 app.use('/sistema', sistemaRoutes);
-//app.use('/chamado', chamadoRoutes);
-//app.use('/plano', planoRoutes);
-//app.use('/especialidade', especialidadeRoutes);
-//app.use('/cronograma', cronogramaRoutes);
+app.use('/chamado', chamadoRoutes);
+app.use('/plano', planoRoutes);
+app.use('/especialidade', especialidadeRoutes);
+app.use('/cronograma', cronogramaRoutes);
 app.use('/atividade', atividadeRoutes);
-//app.use('/recurso', recursoRoutes);
+app.use('/recurso', recursoRoutes);
 
 // Iniciar o servidor
 const PORT = process.env.PORT;
