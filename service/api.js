@@ -78,3 +78,13 @@ export const getEspecialidades = () => getAll('especialidade');
 export const addEspecialidade = (especialidade) => add('especialidade', especialidade);
 export const updateEspecialidade = (idespecialidade, especialidade) => update('especialidade', idespecialidade, especialidade);
 export const deleteEspecialidade = (idespecialidade) => remove('especialidade', idespecialidade);
+
+export const getPlanos = () => getAll('plano');
+export const addPlano = (plano) => add('plano', plano);
+export const updatePlano = (idplano, plano) => update('plano', idplano, plano);
+export const deletePlano = (idplano) => remove('plano', idplano);
+
+export const getRecursos = () => getAll('recurso');
+export const addRecurso = (recurso) => add('recurso', recurso);
+export const updateRecurso = (idrecurso, recurso) => update('recurso', idrecurso, recurso);
+export const deleteRecurso = (idrecurso) => remove('recurso', idrecurso);

@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const { registerUser, loginUser } = require('./authService');
+
 const app = express();
 require('dotenv').config();
 
@@ -31,4 +33,28 @@ app.use('/recurso', recursoRoutes);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
+});
+
+// Rota para registro de usuário
+app.post('/registro', async (req, res) => {
+  const { idToken } = req.body; // O idToken deve ser enviado pelo frontend
+
+    try {
+        const user = await registerUserWithGoogle(idToken);
+        res.status(201).send({ message: 'Usuário registrado com sucesso', user });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+});
+
+// Rota para login de usuário
+app.post('/login', async (req, res) => {
+  const { email_usuario, password } = req.body;
+
+  try {
+      const user = await loginUser(email_usuario, password);
+      res.status(200).send({ message: 'Login bem-sucedido', user });
+  } catch (error) {
+      res.status(500).send({ message: error.message });
+  }
 });
