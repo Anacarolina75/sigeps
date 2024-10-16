@@ -28,11 +28,11 @@ router.get('/:id', async (req, res) => {
 
 // POST - Criar novo chamado
 router.post('/', async (req, res) => {
-  const { titulo_chamado, status_chamado, descricao_chamado } = req.body;
+  const { titulo_chamado, status_chamado, descricao_chamado, tipo_chamado, id_sistema } = req.body;
   try {
     const [result] = await pool.query(
-      'INSERT INTO chamado (titulo_chamado, status_chamado, descricao_chamado) VALUES (?, ?, ?)',
-      [titulo_chamado, status_chamado, descricao_chamado]
+      'INSERT INTO chamado (titulo_chamado, status_chamado, descricao_chamado, tipo_chamado, id_sistema) VALUES (?, ?, ?, ?, ?)',
+      [titulo_chamado, status_chamado, descricao_chamado, tipo_chamado, id_sistema]
     );
     res.json({ id: result.insertId, ...req.body });
   } catch (err) {
