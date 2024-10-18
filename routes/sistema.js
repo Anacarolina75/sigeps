@@ -29,11 +29,11 @@ router.put('/:id', async (req, res) => {
 
 // POST - Criar novo sistema
 router.post('/', async (req, res) => {
-  const { nome_sistema, tipo_sistema, versao_sistema, data_criacao_sistema, ultima_atualizacao_sistema } = req.body;
+  const { nome_sistema, tipo_sistema } = req.body;
   try {
     const [result] = await pool.query(
-      'INSERT INTO sistema (nome_sistema, tipo_sistema, versao_sistema, data_criacao_sistema, ultima_atualizacao_sistema) VALUES (?, ?, ?, ?, ?)',
-      [nome_sistema, tipo_sistema, versao_sistema, data_criacao_sistema, ultima_atualizacao_sistema]
+      'INSERT INTO sistema (nome_sistema, tipo_sistema, versao_sistema) VALUES (?, ?, 1.0)',
+      [nome_sistema, tipo_sistema]
     );
     res.json({ id: result.insertId, ...req.body });
   } catch (err) {
