@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../banco/bd');
 
-// GET - Todos os usuários
+// GET - Todas as atividades
 router.get('/', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM atividade');
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET - Usuário por ID
+// GET - Atividade por ID
 router.get('/:id', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM atividade WHERE idatividade = ?', [req.params.id]);
@@ -26,13 +26,13 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST - Criar novo usuário
+// POST - Criar nova atividade
 router.post('/', async (req, res) => {
-  const { descricao_atividade, inicio_atividade, fim_atividade, status_atividade } = req.body;
+  const { descricao_atividade, inicio_atividade, fim_atividade, status_atividade, id_plano } = req.body;
   try {
     const [result] = await pool.query(
-      'INSERT INTO atividade (descricao_atividade, inicio_atividade, fim_atividade, status_atividade) VALUES (?, ?, ?, ?)',
-      [descricao_atividade, inicio_atividade, fim_atividade, status_atividade]
+      'INSERT INTO atividade (descricao_atividade, inicio_atividade, fim_atividade, status_atividade, id_plano) VALUES (?, ?, ?, ?, ?)',
+      [descricao_atividade, inicio_atividade, fim_atividade, status_atividade, id_plano]
     );
     res.json({ id: result.insertId, ...req.body });
   } catch (err) {
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT - Atualizar usuário
+// PUT - Atualizar atividade
 router.put('/:id', async (req, res) => {
   const { descricao_atividade, inicio_atividade, fim_atividade, status_atividade } = req.body;
   try {
@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE - Deletar usuário
+// DELETE - Deletar atividade
 router.delete('/:id', async (req, res) => {
   try {
     await pool.query('DELETE FROM atividade WHERE idatividade = ?', [req.params.id]);
