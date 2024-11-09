@@ -22,9 +22,10 @@ const add = async (resource, data) => {
         return response.data;
     } catch (error) {
         console.error(`Erro ao adicionar ${resource}:`, error);
-        throw error;
+        throw new Error(`Falha ao adicionar ${resource}: ${error.response ? error.response.data : error.message}`);
     }
 };
+
 
 // Função genérica para atualizar um recurso
 const update = async (resource, id, data) => {
@@ -88,3 +89,8 @@ export const getRecursos = () => getAll('recurso');
 export const addRecurso = (recurso) => add('recurso', recurso);
 export const updateRecurso = (idrecurso, recurso) => update('recurso', idrecurso, recurso);
 export const deleteRecurso = (idrecurso) => remove('recurso', idrecurso);
+
+export const getPlanoRecurso = () => getAll('plano_recurso');
+export const addPlanoRecurso = (plano_recurso) => add('plano_recurso', plano_recurso);
+export const updatePlanoRecurso = (id_plano, plano_recurso) => update('plano_recurso', id_plano, plano_recurso);
+export const deletePlanoRecurso = (id_plano) => remove('plano_recurso', id_plano);

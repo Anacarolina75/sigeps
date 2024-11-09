@@ -18,6 +18,7 @@ const especialidadeRoutes = require('./routes/especialidade');
 const cronogramaRoutes = require('./routes/cronograma');
 const atividadeRoutes = require('./routes/atividade');
 const recursoRoutes = require('./routes/recurso');
+const planoRecursoRoutes = require('/routes/plano_recurso');
 
 // Usar as rotas corretamente
 
@@ -29,6 +30,7 @@ app.use('/especialidade', especialidadeRoutes);
 app.use('/cronograma', cronogramaRoutes);
 app.use('/atividade', atividadeRoutes);
 app.use('/recurso', recursoRoutes);
+app.use('/plano_recurso', planoRecursoRoutes);
 
 /*
 app.use('/api/usuario', usuarioRoutes);
