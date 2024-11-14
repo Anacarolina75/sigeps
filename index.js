@@ -18,7 +18,7 @@ const especialidadeRoutes = require('./routes/especialidade');
 const cronogramaRoutes = require('./routes/cronograma');
 const atividadeRoutes = require('./routes/atividade');
 const recursoRoutes = require('./routes/recurso');
-const planoRecursoRoutes = require('/routes/plano_recurso');
+const planoRecursoRoutes = require('./routes/plano_recurso');
 
 // Usar as rotas corretamente
 
