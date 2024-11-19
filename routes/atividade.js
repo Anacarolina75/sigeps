@@ -36,6 +36,7 @@ router.post('/', async (req, res) => {
     );
     res.json({ id: result.insertId, ...req.body });
   } catch (err) {
+    console.error('Erro no banco de dados:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -57,7 +58,7 @@ router.put('/:id', async (req, res) => {
 // DELETE - Deletar atividade
 router.delete('/:id', async (req, res) => {
   try {
-    await pool.query('DELETE FROM atividade WHERE idatividade = ?', [req.params.id]);
+    await pool.query('DELETE FROM atividade WHERE id_atividade = ?', [req.params.id]);
     res.json({ message: 'Atividade deletada com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -28,14 +28,15 @@ router.get('/:id', async (req, res) => {
 
 // POST - Criar novo plano
 router.post('/', async (req, res) => {
-  const { nome_plano, descricao_plano, data_inicio, data_fim, status_plano } = req.body;
+  const { nome_plano, descricao_plano, data_inicio, data_fim, status_plano, id_chamado } = req.body;
   try {
     const [result] = await pool.query(
-      'INSERT INTO plano (nome_plano, descricao_plano, data_inicio, data_fim, status_plano) VALUES (?, ?, ?, ?, ?)',
-      [nome_plano, descricao_plano, data_inicio, data_fim, status_plano]
+      'INSERT INTO plano (nome_plano, descricao_plano, data_inicio, data_fim, status_plano, id_chamado) VALUES (?, ?, ?, ?, ?, ?)',
+      [nome_plano, descricao_plano, data_inicio, data_fim, status_plano, id_chamado]
     );
     res.json({ id: result.insertId, ...req.body });
   } catch (err) {
+    console.error('Erro no banco de dados:', err);
     res.status(500).json({ error: err.message });
   }
 });
