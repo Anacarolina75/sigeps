@@ -64,4 +64,35 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// GET - Recursos vinculados a um plano
+router.get('/planos/:idPlano/recursos', async (req, res) => {
+  const { idPlano } = req.params;
+  try {
+    // Busca os IDs dos recursos vinculados ao plano
+    const [idsRecursos] = await pool.query(
+      'SELECT id_recurso FROM plano_recurso WHERE id_plano = ?',
+      [idPlano]
+    );
+
+    if (idsRecursos.length === 0) {
+      return res.status(404).json({ message: 'Nenhum recurso encontrado para este plano.' });
+    }
+
+    // Extrai os IDs dos recursos
+    const recursosIds = idsRecursos.map((row) => row.id_recurso);
+
+    // Busca os detalhes dos recursos na tabela "recurso"
+    const [recursos] = await pool.query(
+      'SELECT * FROM recurso WHERE id_recurso IN (?)',
+      [recursosIds]
+    );
+
+    res.json(recursos);
+  } catch (err) {
+    console.error('Erro ao buscar recursos do plano:', err);
+    res.status(500).json({ error: 'Erro interno no servidor.' });
+  }
+});
+
+
 module.exports = router;

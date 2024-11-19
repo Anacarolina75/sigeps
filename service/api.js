@@ -94,3 +94,13 @@ export const getPlanoRecursos = () => getAll('plano_recurso');
 export const addPlanoRecurso = (plano_recurso) => add('plano_recurso', plano_recurso);
 export const updatePlanoRecurso = (id_planorecurso, plano_recurso) => update('plano_recurso', id_planorecurso, plano_recurso);
 export const deletePlanoRecurso = (id_planorecurso) => remove('plano_recurso', id_planorecurso);
+export const getRecursosByPlano = async (idPlano) => {
+    try {
+      const response = await axios.get(`/api/plano_recurso/planos/${idPlano}/recursos`);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar recursos do plano:", error);
+      throw error;
+    }
+  };
+  
